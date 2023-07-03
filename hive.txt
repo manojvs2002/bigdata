@@ -1,0 +1,38 @@
+create database if not exists salesdb;
+
+use salesdb;
+1. Insert 5 records using Insert command in HiveQL
+2. Import the dataset from the sales.csv le
+3. Count the number of sales done by each country
+4. Count the number of sales done by each state
+5. Display (Product, name) grouped by product
+6. Create separate views for VISA and Mastercard
+7. Show all the transactions done in Seattle
+8. Find the max number of transactions done within the state of Ontario
+9. Find the number of transactions whose price is in between 1500-3600
+10. List all the transactions done in the United States using Mastercard
+
+create table sales ( Product string , Price int , Payment_Type string , Name string , City string , State string , Country string ) row format delimited fields terminated by ",";
+
+2)load data local inpath " ./// path /// " into table sales ;
+
+3)select Country , count(*) as country_count from sales group by Country ;
+
+4)select State , count(*) as State_count from sales group by State ;
+
+5) doubt 
+	
+ select Product , Name from sales group by Product;
+
+6) create view visa_transaction as select * from sales where Payment_Type =" Visa" ;
+   create view master_transaction as select * from sales where Payment_type = "Mastercard";
+   select * from visa_transaction;
+   select * from master_transaction;
+
+7) select * from sales where City=" Seattle";
+
+8) select State,count(*) as max_transactions from sales where State = "Ontario" group by State;
+
+9) select count(*) as transaction_count from sales where Price between 1500 and 3600 ;
+
+10) select * from sales where Country ="Unites States" and Payment_Type ="Mastercard" ;
